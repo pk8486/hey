@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post-CT1 Celebration? 💕</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600&family=Sacramento&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --fire-engine-red: #CD1B2D;
+            --deep-valentine: #C8102E;
+            --holiday-pink: #F39FC3;
+            --gentle-peach: #FFEAE3;
+            --burgundy: #66101F;
+            --dark-plum: #3B1634;
+            --warm-gold: #D4AF37;
+            --soft-pink: #FAD0D8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--gentle-peach) 0%, var(--soft-pink) 50%, var(--holiday-pink) 100%);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        #hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 32px;
+            background: rgba(205, 27, 45, 0.15);
+            border-radius: 50% 50% 0 0;
+        }
+
+        .heart::before {
+            left: 10px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        /* Sections */
+        #intro-screen,
+        #timeline-section,
+        #question-section,
+        #success-section {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 90vh;
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+
+        #intro-screen {
+            display: flex;
+        }
+
+        .intro-title {
+            font-family: 'Sacramento', cursive;
+            font-size: clamp(3rem, 8vw, 7rem);
+            color: var(--deep-valentine);
+            margin-bottom: 1rem;
+            animation: heartbeat 2s ease-in-out infinite;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .intro-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.1rem, 3vw, 1.8rem);
+            color: var(--burgundy);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            padding: 0 20px;
+        }
+
+        .btn {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            padding: 18px 50px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .primary-btn {
+            background: linear-gradient(135deg, var(--fire-engine-red), var(--deep-valentine));
+            color: white;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(205, 27, 45, 0.4);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--holiday-pink), var(--fire-engine-red));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 45%;
+            padding: 25px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            text-align: left;
+        }
+
+        .timeline-date {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--fire-engine-red);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 24px;
+            background: var(--fire-engine-red);
+            border-radius: 50%;
+            border: 4px solid var(--gentle-peach);
+            z-index: 1;
+        }
+
+        /* Question Section */
+        .button-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+            position: relative;
+            height: 150px;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #no-btn {
+            background: #eee;
+            color: #666;
+            position: absolute;
+        }
+
+        .attempt-text {
+            font-family: 'Sacramento', cursive;
+            font-size: 1.8rem;
+            color: var(--fire-engine-red);
+            margin-top: 20px;
+        }
+
+        /* Meter */
+        .meter-bar {
+            width: 280px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 3px solid var(--fire-engine-red);
+            margin: 20px 0;
+        }
+
+        .meter-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--fire-engine-red), var(--holiday-pink));
+            transition: width 2s ease-out;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+                align-items: flex-start;
+                padding-left: 45px;
+            }
+
+            .timeline-content {
+                width: 100%;
+            }
+
+            .timeline-dot {
+                left: 20px;
+            }
+
+            .button-container {
+                flex-direction: column;
+                height: 250px;
+            }
+
+            #no-btn {
+                position: relative;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="hearts-container"></div>
+
+    <div class="container">
+        <!-- Intro -->
+        <div id="intro-screen">
+            <h1 class="intro-title">Hey...</h1>
+            <p class="intro-subtitle">Class Test 1 will officially be over on the 13th!</p>
+            <button class="btn primary-btn" onclick="navigateTo('timeline-section')">Next 💕</button>
+        </div>
+
+        <!-- Timeline -->
+        <div id="timeline-section">
+            <h2 class="intro-title" style="font-size: 3rem;">Post-CT1 Vibes</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">The Beginning</div>
+                        <p>Starting this semester was just "okay" until I started talking to you more. Suddenly, classes
+                            became much more interesting.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">The Study Grind</div>
+                        <p>Preparing for Class Test 1 was stressful, but the question papers you shared helped a lot.
+                        </p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">The Test Stress</div>
+                        <p>Even when my head was buried in slides, I couldn't stop thinking about asking you something
+                            special.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">The Finish Line</div>
+                        <p>Now that CT1 is finally coming to an end, I've realized I don't want to chase the sunset
+                            alone; I want to chase it with <i>you</i>.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+            <button class="btn primary-btn" onclick="navigateTo('question-section')">One Small Question →</button>
+        </div>
+
+        <!-- Question -->
+        <div id="question-section">
+            <h2 class="intro-title" style="font-size: 3.5rem;">Will You Go Out With Me? 💝</h2>
+            <p class="intro-subtitle">For a short ride after our test is over on February 13th!</p>
+            <div class="button-container">
+                <button id="yes-btn" class="btn primary-btn" onclick="handleYes()">Yes! 💕</button>
+                <button id="no-btn" class="btn" onmouseenter="dodgeButton()" onclick="dodgeButton()">No</button>
+            </div>
+            <div id="attempt-message"></div>
+        </div>
+
+        <!-- Success -->
+        <div id="success-section">
+            <h2 class="intro-title" style="font-size: 4rem;">YES! 🎉</h2>
+            <p class="intro-subtitle" style="font-size: 1.5rem;">Goodbye CT1 stress!</p>
+
+            <div class="meter-bar">
+                <div id="final-meter" class="meter-fill"></div>
+            </div>
+            <div class="intro-subtitle" style="font-size: 1.2rem;">Happiness: 1000%</div>
+
+            <p
+                style="max-width: 600px; line-height: 1.6; background: rgba(255,255,255,0.6); padding: 20px; border-radius: 15px;">
+                You just made my day! Now that Class Test 1 is over, Thanks for saying yes. See you on the 13th! 💕✨
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Floating Hearts
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.top = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.opacity = Math.random() * 0.4;
+                heart.style.transform = `scale(${Math.random() * 0.5 + 0.5})`;
+                container.appendChild(heart);
+            }
+        }
+        createHearts();
+
+        // Navigation
+        function navigateTo(id) {
+            document.querySelectorAll('.container > div').forEach(div => div.style.display = 'none');
+            const target = document.getElementById(id);
+            target.style.display = 'flex';
+            if (id === 'question-section') {
+                resetNoButton();
+            }
+        }
+
+        // Dodge Logic
+        let attemptCount = 0;
+        let yesScale = 1;
+        const messages = ["Wait, what? 🥺", "Test stress speaking? 📚", "Try the other button! 👉", "Think of the Panipuri! 🥙"];
+
+        function dodgeButton() {
+            const noBtn = document.getElementById('no-btn');
+            const yesBtn = document.getElementById('yes-btn');
+            const container = document.querySelector('.button-container');
+
+            // Random move
+            const maxX = container.clientWidth - noBtn.clientWidth;
+            const maxY = container.clientHeight - noBtn.clientHeight;
+            noBtn.style.left = Math.random() * maxX + 'px';
+            noBtn.style.top = Math.random() * maxY + 'px';
+
+            // Grow Yes
+            yesScale += 0.2;
+            yesBtn.style.transform = `scale(${yesScale})`;
+
+            // Message
+            const msgDiv = document.getElementById('attempt-message');
+            msgDiv.innerHTML = `<p class="attempt-text">${messages[Math.min(attemptCount++, messages.length - 1)]}</p>`;
+        }
+
+        function resetNoButton() {
+            const noBtn = document.getElementById('no-btn');
+            noBtn.style.left = 'auto';
+            noBtn.style.top = 'auto';
+            noBtn.style.position = (window.innerWidth < 768) ? 'relative' : 'absolute';
+        }
+
+        // Success
+        function handleYes() {
+            navigateTo('success-section');
+            setTimeout(() => {
+                document.getElementById('final-meter').style.width = '100%';
+            }, 100);
+
+            // Confetti
+            const end = Date.now() + (3 * 1000);
+            (function frame() {
+                confetti({
+                    particleCount: 3,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#CD1B2D', '#F39FC3']
+                });
+                confetti({
+                    particleCount: 3,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#CD1B2D', '#F39FC3']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+    </script>
+</body>
+
+</html>
