@@ -319,56 +319,63 @@
     <div class="container">
         <!-- Intro -->
         <div id="intro-screen">
-            <h1 class="intro-title">Hey...</h1>
-            <p class="intro-subtitle">Class Test 1 will officially be over on the 13th!</p>
+            <h1 class="intro-title">Hey, You...</h1>
+            <p class="intro-subtitle">Class Test 1 will be history soon.</p>
             <button class="btn primary-btn" onclick="navigateTo('timeline-section')">Next 💕</button>
         </div>
 
 <!-- Admiration Timeline -->
         <div id="timeline-section">
-            <h2 class="intro-title" style="font-size: clamp(2rem, 8vw, 3.5rem);">Things I Admire</h2>
+            <h2 class="intro-title" style="font-size: clamp(2.5rem, 8vw, 4rem);">Why You?</h2>
             <div class="timeline">
                 
                 <!-- Item 1: Confidence -->
                 <div class="timeline-item">
+                    <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <span class="timeline-icon">✨</span>
-                        <div class="timeline-date">Your Confidence</div>
-                        <p class="timeline-text">There are so many things I admire about you, specifically your confidence. It lights up the room.</p>
+                        <div class="timeline-date">Your Radiance</div>
+                        <p class="timeline-text">There are so many things I admire about you, specifically your confidence. It doesn't just exist; it lights up the entire room.</p>
                     </div>
-                    <div class="timeline-dot"></div>
                 </div>
 
                 <!-- Item 2: Kindness -->
                 <div class="timeline-item">
+                    <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <span class="timeline-icon">🌹</span>
-                        <div class="timeline-date">Your Kindness</div>
-                        <p class="timeline-text">I admire your kindness, and simply what a nice person you are to everyone around you. It's rare and beautiful.</p>
+                        <div class="timeline-date">Your Heart</div>
+                        <p class="timeline-text">I admire your kindness and simply what a nice person you are to everyone around you. It’s a rare and beautiful quality.</p>
                     </div>
-                    <div class="timeline-dot"></div>
                 </div>
 
-                <!-- Item 3: Gravity/Newton -->
+                <!-- Item 3: Your Presence (Changed from Gravity) -->
                 <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="gravity-visual">🍎</div>
-                        <span class="timeline-icon">🪐</span>
-                        <div class="timeline-date">Newton's Proof</div>
-                        <p class="timeline-text">I think you are the living proof of Newton’s discovery—gravity... are you??</p>
-                    </div>
                     <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-icon">💫</span>
+                        <div class="timeline-date">Your Vibe</div>
+                        <p class="timeline-text">I simply like listening to you and I really like being around you. It just feels right.</p>
+                    </div>
                 </div>
 
-                <!-- Item 4: Falling -->
-                <!-- <div class="timeline-item">
-                    <div class="timeline-content">
-                        <span class="timeline-icon">🌠</span>
-                        <div class="timeline-date">The Force</div>
-                        <p class="timeline-text">...because I can’t explain the force that is pulling me in, I just know that I am falling towards you.</p>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div> -->
+            </div>
+            <button class="btn primary-btn" onclick="navigateTo('question-section')">One Small Question →</button>
+        </div>
+
+        <!-- Question -->
+        <div id="question-section">
+            <h2 class="intro-title" style="font-size: clamp(2.5rem, 10vw, 4.5rem);">Will You Go Out With Me?</h2>
+            <p class="intro-subtitle">Let's chase the sunset together after our tests end on February 13th? 🌅</p>
+            <div class="button-container">
+                <button id="yes-btn" class="btn primary-btn" onclick="handleYes()">Yes! 💕</button>
+                <button id="no-btn" class="btn" onmouseenter="dodgeButton()" onclick="dodgeButton()">No</button>
+            </div>
+            <div id="attempt-message"></div>
+        </div>
+        
+            <button class="btn primary-btn" onclick="navigateTo('question-section')">One Small Question →</button>
+        </div>
 
             </div>
             <button class="btn primary-btn" onclick="navigateTo('question-section')">One Small Question →</button>
@@ -392,11 +399,11 @@
             <div class="meter-bar">
                 <div id="final-meter" class="meter-fill"></div>
             </div>
-            <div class="intro-subtitle" style="font-size: 1.2rem;">Happiness: 1000%</div>
+            <div class="intro-subtitle" style="font-size: 1.2rem;">Excitement Level: Infinity</div>
 
             <p
                 style="max-width: 600px; line-height: 1.6; background: rgba(255,255,255,0.6); padding: 20px; border-radius: 15px;">
-                You just made my day! Thanks for saying yes. See you on the 13th! 💕✨
+                You just made my day! I can't wait for our ride on the 13th. It's going to be amazing! 💕✨
             </p>
         </div>
     </div>
@@ -495,6 +502,7 @@
 
 
 </html>
+
 
 
 
