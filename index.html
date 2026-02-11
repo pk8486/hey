@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Hey there...💕</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600&family=Sacramento&display=swap"
@@ -25,6 +25,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         @keyframes fadeIn {
@@ -130,6 +131,7 @@
             min-height: 90vh;
             text-align: center;
             animation: fadeIn 1s ease-out;
+            padding: 20px 0;
         }
 
         #intro-screen {
@@ -138,27 +140,29 @@
 
         .intro-title {
             font-family: 'Sacramento', cursive;
-            font-size: clamp(3rem, 8vw, 7rem);
+            font-size: clamp(2.5rem, 10vw, 7rem);
             color: var(--deep-valentine);
             margin-bottom: 1rem;
             animation: heartbeat 2s ease-in-out infinite;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 0 15px;
         }
 
         .intro-subtitle {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.1rem, 3vw, 1.8rem);
+            font-size: clamp(1rem, 4vw, 1.8rem);
             color: var(--burgundy);
             margin-bottom: 3rem;
             font-weight: 300;
             letter-spacing: 1px;
             padding: 0 20px;
+            max-width: 90%;
         }
 
         .btn {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.1rem;
-            padding: 18px 50px;
+            font-size: clamp(1rem, 3vw, 1.1rem);
+            padding: 16px 45px;
             border: none;
             border-radius: 50px;
             cursor: pointer;
@@ -166,6 +170,9 @@
             font-weight: 600;
             letter-spacing: 1px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            min-width: 160px;
+            touch-action: manipulation;
+            user-select: none;
         }
 
         .primary-btn {
@@ -184,6 +191,7 @@
             max-width: 800px;
             margin: 40px auto;
             padding: 20px;
+            width: 100%;
         }
 
         .timeline::before {
@@ -194,6 +202,7 @@
             width: 4px;
             height: 100%;
             background: linear-gradient(to bottom, var(--holiday-pink), var(--fire-engine-red));
+            border-radius: 3px;
         }
 
         .timeline-item {
@@ -216,6 +225,7 @@
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
             text-align: left;
+            line-height: 1.6;
         }
 
         .timeline-date {
@@ -238,6 +248,50 @@
             z-index: 1;
         }
 
+        .timeline-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* Game Stats (New Addition) */
+        .game-stats {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--burgundy);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+        }
+
+        .stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--fire-engine-red);
+            font-weight: 700;
+        }
+
         /* Question Section */
         .button-container {
             display: flex;
@@ -254,6 +308,16 @@
             background: #eee;
             color: #666;
             position: absolute;
+            transition: all 0.2s ease-out;
+            /* Smoother dodge */
+            z-index: 50;
+            /* Ensure No button stays on top of Yes button */
+        }
+
+        #yes-btn {
+            z-index: 10;
+            position: relative;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .attempt-text {
@@ -261,6 +325,36 @@
             font-size: 1.8rem;
             color: var(--fire-engine-red);
             margin-top: 20px;
+            min-height: 3rem;
+        }
+
+        /* Success Score Display (New Addition) */
+        .score-display {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 20px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .score-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--burgundy);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .score-stats {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .score-stat {
+            text-align: center;
         }
 
         /* Meter */
@@ -309,6 +403,16 @@
             #no-btn {
                 position: relative;
             }
+
+            .game-stats {
+                padding: 8px 15px;
+                top: 15px;
+                right: 15px;
+            }
+
+            .stat-value {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
@@ -329,7 +433,6 @@
             <h2 class="intro-title" style="font-size: clamp(2.5rem, 8vw, 4rem);">Do You Know?</h2>
             <div class="timeline">
 
-                <!-- Item 1: Confidence -->
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
@@ -340,18 +443,16 @@
                     </div>
                 </div>
 
-                <!-- Item 2: Kindness -->
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <span class="timeline-icon">🌹</span>
                         <div class="timeline-date">Your Heart</div>
                         <p class="timeline-text">I admire your kindness and simply what a nice person you are to
-                            everyone around you. It’s rare and beautiful.</p>
+                            everyone around you. It's rare and beautiful.</p>
                     </div>
                 </div>
 
-                <!-- Item 3: Your Presence (Changed from Gravity) -->
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
@@ -368,6 +469,18 @@
 
         <!-- Question -->
         <div id="question-section">
+            <!-- Game Stats Display -->
+            <div class="game-stats" id="game-stats" style="display: none;">
+                <div class="stat-item">
+                    <div class="stat-label">Time</div>
+                    <div class="stat-value" id="timer-display">0s</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Tries</div>
+                    <div class="stat-value" id="click-display">0</div>
+                </div>
+            </div>
+
             <h2 class="intro-title" style="font-size: clamp(2.5rem, 10vw, 4.5rem);">Will You Go Out With Me?</h2>
             <p class="intro-subtitle">To chase the sunset after our tests end on 13th? 🌅 <br>We will
                 be back before your hostel curfew!</p>
@@ -378,12 +491,25 @@
             <div id="attempt-message"></div>
         </div>
 
-
-
         <!-- Success -->
         <div id="success-section">
             <h2 class="intro-title" style="font-size: 4rem;">YES! 🎉</h2>
             <p class="intro-subtitle" style="font-size: 1.5rem;">Say goodbye to CT1 stress!</p>
+
+            <!-- Final Score Display -->
+            <div class="score-display">
+                <div class="score-title">Your Stats 🏆</div>
+                <div class="score-stats">
+                    <div class="score-stat">
+                        <div class="stat-label">Time Taken</div>
+                        <div class="stat-value" id="final-time">0s</div>
+                    </div>
+                    <div class="score-stat">
+                        <div class="stat-label">Total Tries</div>
+                        <div class="stat-value" id="final-clicks">0</div>
+                    </div>
+                </div>
+            </div>
 
             <div class="meter-bar">
                 <div id="final-meter" class="meter-fill"></div>
@@ -398,6 +524,14 @@
     </div>
 
     <script>
+        // Game State Variables
+        let gameStartTime = 0;
+        let gameTimer = null;
+        let clickCount = 0;
+        let yesScale = 1;
+
+        const messages = ["Wait, what? 🥺", "Test stress speaking? 📚", "Try the other button! ☝️", "The ride will be fun! 🏍️", "Think of the vibes! ✨", "Think of the Panipuri! 🥙"];
+
         // Floating Hearts
         function createHearts() {
             const container = document.getElementById('hearts-container');
@@ -420,25 +554,54 @@
             const target = document.getElementById(id);
             target.style.display = 'flex';
             if (id === 'question-section') {
-                resetNoButton();
+                startGame();
             }
         }
 
-        // Dodge Logic
-        let attemptCount = 0;
-        let yesScale = 1;
-        const messages = ["Wait, what? 🥺", "Test stress speaking? 📚", "Try the other button! ☝️", "The ride will be fun! 🏍️", "Think of the vibes! ✨", "Think of the Panipuri! 🥙"];
+        // Game Logic Functions
+        function startGame() {
+            gameStartTime = Date.now();
+            clickCount = 0;
+            yesScale = 1;
 
+            document.getElementById('game-stats').style.display = 'flex';
+            resetNoButton();
+
+            // Start timer
+            if (gameTimer) clearInterval(gameTimer);
+            gameTimer = setInterval(updateTimer, 100);
+        }
+
+        function updateTimer() {
+            const elapsed = Math.floor((Date.now() - gameStartTime) / 1000);
+            document.getElementById('timer-display').textContent = elapsed + 's';
+        }
+
+        // Dodge Logic
         function dodgeButton() {
             const noBtn = document.getElementById('no-btn');
             const yesBtn = document.getElementById('yes-btn');
             const container = document.querySelector('.button-container');
 
+            // Increment stats
+            clickCount++;
+            document.getElementById('click-display').textContent = clickCount;
+
+            // Ensure absolute positioning for dodge
+            noBtn.style.position = 'absolute';
+
             // Random move
             const maxX = container.clientWidth - noBtn.clientWidth;
             const maxY = container.clientHeight - noBtn.clientHeight;
-            noBtn.style.left = Math.random() * maxX + 'px';
-            noBtn.style.top = Math.random() * maxY + 'px';
+            // Ensure bounds are positive
+            const safeMaxX = maxX > 0 ? maxX : 200;
+            const safeMaxY = maxY > 0 ? maxY : 200;
+
+            const randomX = Math.random() * safeMaxX;
+            const randomY = Math.random() * safeMaxY;
+
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
 
             // Grow Yes
             yesScale += 0.2;
@@ -446,18 +609,40 @@
 
             // Message
             const msgDiv = document.getElementById('attempt-message');
-            msgDiv.innerHTML = `<p class="attempt-text">${messages[Math.min(attemptCount++, messages.length - 1)]}</p>`;
+            msgDiv.innerHTML = `<p class="attempt-text">${messages[Math.min(clickCount - 1, messages.length - 1)]}</p>`;
         }
 
         function resetNoButton() {
             const noBtn = document.getElementById('no-btn');
+            const yesBtn = document.getElementById('yes-btn');
+
             noBtn.style.left = 'auto';
             noBtn.style.top = 'auto';
-            noBtn.style.position = (window.innerWidth < 768) ? 'relative' : 'absolute';
+            // Reset position logic based on screen size
+            if (window.innerWidth < 768) {
+                noBtn.style.position = 'relative';
+            } else {
+                noBtn.style.position = 'relative';
+            }
+
+            // Reset Yes button
+            yesBtn.style.transform = `scale(1)`;
+            document.getElementById('attempt-message').innerHTML = '';
         }
 
         // Success
         function handleYes() {
+            // Stop timer
+            clearInterval(gameTimer);
+
+            // Calculate final stats
+            const finalTime = Math.floor((Date.now() - gameStartTime) / 1000);
+            document.getElementById('final-time').textContent = finalTime + 's';
+            document.getElementById('final-clicks').textContent = clickCount;
+
+            // Hide game stats UI
+            document.getElementById('game-stats').style.display = 'none';
+
             navigateTo('success-section');
             setTimeout(() => {
                 document.getElementById('final-meter').style.width = '100%';
@@ -489,8 +674,4 @@
     </script>
 </body>
 
-
 </html>
-
-
-
